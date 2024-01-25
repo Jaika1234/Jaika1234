@@ -1,0 +1,6 @@
+/**
+!.gitignore
+!/Assets/
+!/game/
+!/ProjectSettings/
+!/UserSettings/
