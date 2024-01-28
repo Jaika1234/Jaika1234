@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkeletonAttackState : EnemyState
@@ -28,8 +30,11 @@ public class SkeletonAttackState : EnemyState
         base.Update();
 
         enemy.SetZeroVelocity();
-
+        if (enemy.GetHitState())
+        {
+            stateMachine.ChangeState(enemy.idleState);
+        }
         if (triggerCalled)
             stateMachine.ChangeState(enemy.battleState);
-    }
+}
 }

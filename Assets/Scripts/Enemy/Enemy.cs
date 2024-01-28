@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -10,6 +11,7 @@ public class Enemy : Entity
     public float stunDuration;
     public Vector2 stunDirection;
     protected bool canBeStunned;
+    protected bool hitRecovery;//20240128
     [SerializeField] protected GameObject counterImage;
 
     [Header("Move info")]
@@ -93,7 +95,24 @@ public class Enemy : Entity
 
         return false;
     }
-
+    #region getHit and recovery
+    public virtual bool GetHitState()
+    {
+        return hitRecovery;
+    }
+    public virtual void GetHit()
+    {
+        hitRecovery = true;
+        HitRecovery();
+        Debug.Log("hitRecovery is true");
+    }
+    IEnumerator HitRecovery()
+    {
+        yield return new WaitForSeconds(1f);
+        hitRecovery = false;
+        Debug.Log("hitRecovery is false");
+    }
+    #endregion
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50, whatIsPlayer);
