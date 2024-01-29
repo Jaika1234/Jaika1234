@@ -55,8 +55,13 @@ public class Enemy_Skeleton : Enemy
     }
     public override void GetHit()
     {
-        base.GetHit(); 
-        StartCoroutine("FreezeTimerFor", 1f);
-        stateMachine.ChangeState(idleState);
+        base.GetHit();
+        StartCoroutine(IdleAfterHit());
+    }
+    private IEnumerator IdleAfterHit()
+    {
+        yield return new WaitForSeconds(1.2f);
+        stateMachine.ChangeState(idleState); 
+
     }
 }

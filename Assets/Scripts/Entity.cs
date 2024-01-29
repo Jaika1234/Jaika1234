@@ -62,19 +62,11 @@ public class Entity : MonoBehaviour
         anim.speed = 1;
     }
     public virtual void DamageImpact() => StartCoroutine("HitKnockback");
-
-    public virtual void DamageEffect()
-    {
-        fx.StartCoroutine("FlashFX");
-        StartCoroutine("HitKnockback");
-
-    }
-
     protected virtual IEnumerator HitKnockback()
     {
         isKnocked = true;
 
-        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
+        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y); 
         yield return new WaitForSeconds(knockbackDuration);
 
         isKnocked = false;

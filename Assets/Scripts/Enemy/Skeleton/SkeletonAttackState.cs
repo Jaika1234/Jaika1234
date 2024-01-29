@@ -30,10 +30,10 @@ public class SkeletonAttackState : EnemyState
         base.Update();
 
         enemy.SetZeroVelocity();
-        if (enemy.GetHitState())
-        {
-            stateMachine.ChangeState(enemy.idleState);
-        }
+        //if (enemy.GetHitState())
+        //{
+        //    stateMachine.ChangeState(enemy.idleState);
+        //}
         if (triggerCalled)
             stateMachine.ChangeState(enemy.battleState);
 }
