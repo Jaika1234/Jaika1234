@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62951cc795cf9ad40a49b98b7128ddf6, type: 3}
-  m_Name: BluePotion
+  m_Name: Blue Potion
   m_EditorClassIdentifier: 
-  itemName: BluePotion
+  itemType: 0
+  itemName: Blue Potion
   icon: {fileID: 920896099, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
