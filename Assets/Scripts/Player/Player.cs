@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : Entity
 {
@@ -86,7 +87,6 @@ public class Player : Entity
 
         CheckForDashInput();
 
-
         //if (Input.GetKeyDown(KeyCode.F))
         //    skill.crystal.CanUseSkill();
     }
@@ -132,5 +132,5 @@ public class Player : Entity
             stateMachine.ChangeState(dashState);
         }
     }
-
+    
 }
