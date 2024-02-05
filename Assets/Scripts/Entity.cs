@@ -47,11 +47,15 @@ public class Entity : MonoBehaviour
         fx = GetComponent<EntityFX>();
         stats = GetComponent<CharacterStats>();
         cd = GetComponent<CapsuleCollider2D>();
+
+        if (sr == null || anim == null || rb == null || fx == null || stats == null || cd == null)
+        {
+            Debug.LogError("One or more components are not assigned to the Entity.");
+        }
     }
 
     protected virtual void Update()
     {
-
     }
     public virtual void SlowEntityBy(float _slowPercentage, float _slowDuration)
     {

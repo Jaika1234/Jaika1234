@@ -78,7 +78,7 @@ public class Inventory : MonoBehaviour
         UpdateSlotUI();
     }
 
-    private void Unequipment(ItemData_Equipment itemToRemove)
+    public void Unequipment(ItemData_Equipment itemToRemove)
     {
         if (equipmentDictionary.TryGetValue(itemToRemove, out InventoryItem value))
         {
@@ -98,7 +98,6 @@ public class Inventory : MonoBehaviour
                     equipmentSlot[i].UpdataSlot(item.Value);
             }
         }
-
 
 
         for (int i = 0; i < inventoryItemSlot.Length; i++)
@@ -185,5 +184,38 @@ public class Inventory : MonoBehaviour
         }
 
         UpdateSlotUI();
+    }
+
+    public bool CanCraft(ItemData_Equipment _itemToCraft,List<InventoryItem> _requireMaterials)
+    {
+        List<InventoryItem> materialsToRemove = new List<InventoryItem>();
+        for(int i = 0; i<_requireMaterials.Count; i++)
+        {
+            if (stashDictionary.TryGetValue(_requireMaterials[i].data, out InventoryItem stashValue))
+            {
+                //add this to used material
+                if(stashValue.stackSize < _requireMaterials[i].stackSize)
+                {
+                    Debug.Log("not enough materials");
+                    return false;
+                }
+                else
+                {
+                    materialsToRemove.Add(stashValue); 
+                }
+            }
+            else
+            {
+                Debug.Log("not enough materials");
+                return false;
+            }
+        }
+        for (int i = 0; i < materialsToRemove.Count; i++)
+        {
+            RemoveItem(_requireMaterials[i].data);
+        }
+        AddItem(_itemToCraft);
+        Debug.Log("This is you Item"+ _itemToCraft.name);
+        return true;
     }
 }
