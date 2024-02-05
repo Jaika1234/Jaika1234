@@ -95,24 +95,6 @@ public class Enemy : Entity
 
         return false;
     }
-    #region getHit and recovery
-    public virtual bool GetHitState()
-    {
-        return hitRecovery;
-    }
-    public virtual void GetHit()
-    {
-        hitRecovery = true;
-        HitRecovery();
-        Debug.Log("hitRecovery is true");
-    }
-    IEnumerator HitRecovery()
-    {
-        yield return new WaitForSeconds(1f);
-        hitRecovery = false;
-        Debug.Log("hitRecovery is false");
-    }
-    #endregion
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50, whatIsPlayer);

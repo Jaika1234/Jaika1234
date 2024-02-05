@@ -16,3 +16,17 @@ MonoBehaviour:
   itemName: Wood Sowrd
   icon: {fileID: -1055781779, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   equipmentTpye: 0
+  strength: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
+  damage: -3
+  critChance: 0
+  critPower: 0
+  maxHealth: 0
+  armor: 0
+  evasion: 0
+  magicResistance: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightingDamage: 0

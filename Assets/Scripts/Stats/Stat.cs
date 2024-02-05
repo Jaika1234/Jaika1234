@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,7 @@ public class Stat
     }
     public void RemoveModifier(int _modifier)
     {
-        modifiers.RemoveAt(_modifier);
+        modifiers.Remove(_modifier);
     }
+
 }

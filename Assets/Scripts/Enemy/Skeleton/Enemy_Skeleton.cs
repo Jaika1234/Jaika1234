@@ -53,11 +53,6 @@ public class Enemy_Skeleton : Enemy
         base.Die(); 
         stateMachine.ChangeState(deadState);
     }
-    public override void GetHit()
-    {
-        base.GetHit();
-        StartCoroutine(IdleAfterHit());
-    }
     private IEnumerator IdleAfterHit()
     {
         yield return new WaitForSeconds(1.2f);
