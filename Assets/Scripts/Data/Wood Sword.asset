@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d355a8267fdbb9643bcbc6607a0e0c8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4085ba1b4d741e944b0b5f9567ec6c3a, type: 3}
   m_Name: Wood Sword
   m_EditorClassIdentifier: 
-  itemType: 1
-  itemName: Wood Sowrd
+  itemType: 0
+  itemName: Wood Sword
   icon: {fileID: -1055781779, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   equipmentTpye: 0
-  strength: 0
+  strength: 2
   agility: 0
   intelligence: 0
   vitality: 0
-  damage: -3
+  damage: 10
   critChance: 0
   critPower: 0
   maxHealth: 0
@@ -30,3 +30,4 @@ MonoBehaviour:
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 0
+  craftingMaterials: []
