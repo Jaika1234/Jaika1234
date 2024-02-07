@@ -16,7 +16,9 @@ public class EnemyStats : CharacterStats
     protected override void Start()
     {
         ApplyLevelModifiers();
+
         base.Start();
+
         enemy = GetComponent<Enemy>();
         myDropSystem= GetComponent<ItemDrop>();
     }

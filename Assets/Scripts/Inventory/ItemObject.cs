@@ -8,13 +8,14 @@ public class ItemObject : MonoBehaviour
     [SerializeField] private ItemData itemData;
     [SerializeField] private Vector2 velocity;
     
-    private void OnValidate()
+
+    private void SetupVisuals()
     {
         if (itemData == null)
             return;
 
-      GetComponent<SpriteRenderer>().sprite = itemData.icon;
-      gameObject.name= "Item Object"+itemData.itemName;
+        GetComponent<SpriteRenderer>().sprite = itemData.icon;
+        gameObject.name = "Item Object" + itemData.itemName;
     }
 
     private void Update()
@@ -28,6 +29,8 @@ public class ItemObject : MonoBehaviour
     {
         itemData = _itemData;
         rb.velocity = _velocity;
+
+        SetupVisuals();
     }
 
 

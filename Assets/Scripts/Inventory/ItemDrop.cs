@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    [SerializeField] private int amountOfItems;
+    [SerializeField] private int possibleItemDrop;
     [SerializeField] private ItemData[] possibleDrop;
-    private List<ItemData> dropList;
+    private List<ItemData> dropList= new List<ItemData>();
 
     [SerializeField] private GameObject dropPrefab;
-    [SerializeField] private ItemData item;
+
 
     public void GenerateDrop()
     {
@@ -18,7 +18,7 @@ public class ItemDrop : MonoBehaviour
             if (Random.Range(0, 100) <= possibleDrop[i].dropChance)
                 dropList.Add(possibleDrop[i]);
         }
-        for (int i = 0; i< amountOfItems; i++)
+        for (int i = 0; i< possibleItemDrop; i++)
         {
             ItemData randomItem = dropList[Random.Range(0,dropList.Count -1)];
             dropList.Remove(randomItem);
