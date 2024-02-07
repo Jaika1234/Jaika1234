@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 006cb3c48a482ff4c84610d3a587fcca, type: 3}
-  m_Name: Blue Potion
+  m_Script: {fileID: 11500000, guid: e3954b9b9ea8c024fbdda593588b5bb9, type: 3}
+  m_Name: Thunder Strike
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemName: Blue Potion
-  icon: {fileID: 920896099, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
-  dropChance: 60

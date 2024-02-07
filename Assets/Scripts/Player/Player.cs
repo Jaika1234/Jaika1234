@@ -42,6 +42,8 @@ public class Player : Entity
 
     public PlayerAimSwordState aimSwordState { get; private set; }
     public PlayerCatchSwordState catchSword { get; private set; }
+
+    public PlayerDeadState deadState { get; private set; }
     //public PlayerBlackholeState blackHole { get; private set; }
     #endregion
 
@@ -63,6 +65,7 @@ public class Player : Entity
 
         aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
         catchSword = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
+        deadState = new PlayerDeadState(this, stateMachine, "Die");
         //blackHole = new PlayerBlackholeState(this, stateMachine, "Jump");
     }
 
@@ -116,10 +119,6 @@ public class Player : Entity
     {
         if (IsWallDetected())
             return;
-
-
-
-
         if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CanUseSkill())
         {
 
@@ -132,5 +131,11 @@ public class Player : Entity
             stateMachine.ChangeState(dashState);
         }
     }
-    
+
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
+    }
+
 }

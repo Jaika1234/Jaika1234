@@ -218,4 +218,15 @@ public class Inventory : MonoBehaviour
         Debug.Log("This is you Item"+ _itemToCraft.name);
         return true;
     }
+
+    public ItemData_Equipment GetEquipment(EquipmentTpye _type)
+    {
+        ItemData_Equipment equipmentItem = null;
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
+        {
+            if (item.Key.equipmentTpye == _type)
+               equipmentItem = item.Key;
+        }
+        return equipmentItem;
+    }
 }
