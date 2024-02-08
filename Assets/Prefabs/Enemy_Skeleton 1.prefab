@@ -377,7 +377,9 @@ MonoBehaviour:
   hitMat: {fileID: 2100000, guid: 78758ed07969e5449922bd9487087aa7, type: 2}
   igniteColor: []
   chillColor: []
-  shockColor: []
+  shockColor:
+  - {r: 0.9974991, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &107270211905363421
 MonoBehaviour:
   m_ObjectHideFlags: 0

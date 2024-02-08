@@ -97,8 +97,6 @@ public class CharacterStats : MonoBehaviour
         totalDamage = CheckTargetArmor(_targetStats, totalDamage);
         _targetStats.TakeDamage(totalDamage);
 
-
-        //if invnteroy current weapon has fire effect
         // then DoMagicalDamage(_targetStats);
 
     }
@@ -116,7 +114,7 @@ public class CharacterStats : MonoBehaviour
         int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage + intelligence.GetValue();
 
         totalMagicalDamage = CheckTargetResistance(_targetStats, totalMagicalDamage);
-        _targetStats.TakeDamage(totalMagicalDamage);
+        _targetStats.TakeDamage(totalMagicalDamage);    
 
 
         if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
@@ -124,6 +122,22 @@ public class CharacterStats : MonoBehaviour
 
 
         AttemptyToApplyAilements(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
+
+    }
+
+    public virtual void DoEffectDamage(CharacterStats _targetStats)
+    {
+        int _fireDamage = fireDamage.GetValue();
+        int _iceDamage = iceDamage.GetValue();
+        int _lightingDamage = lightingDamage.GetValue();
+
+        int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage;
+
+        if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
+            return;
+        AttemptyToApplyAilements(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
+
+        _targetStats.TakeDamage(totalMagicalDamage);
 
     }
 
@@ -207,8 +221,6 @@ public class CharacterStats : MonoBehaviour
             {
                 if (GetComponent<Player>() != null)
                     return;
-
-                //HitNearestTargetWithShockStrike();
             }
         }
 
@@ -225,37 +237,6 @@ public class CharacterStats : MonoBehaviour
         fx.ShockFxFor(ailmentsDuration);
     }
 
-    //private void HitNearestTargetWithShockStrike()
-    //{
-    //    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
-
-    //    float closestDistance = Mathf.Infinity;
-    //    Transform closestEnemy = null;
-
-    //    foreach (var hit in colliders)
-    //    {
-    //        if (hit.GetComponent<Enemy>() != null && Vector2.Distance(transform.position, hit.transform.position) > 1)
-    //        {
-    //            float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
-
-    //            if (distanceToEnemy < closestDistance)
-    //            {
-    //                closestDistance = distanceToEnemy;
-    //                closestEnemy = hit.transform;
-    //            }
-    //        }
-
-    //        if (closestEnemy == null)            // delete if you don't want shocked target to be hit by shock strike
-    //            closestEnemy = transform;
-    //    }
-
-
-    //    if (closestEnemy != null)
-    //    {
-    //        GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity);
-    //        newShockStrike.GetComponent<ShockStrike_Controller>().Setup(shockDamage, closestEnemy.GetComponent<CharacterStats>());
-    //    }
-    //}
     private void ApplyIgniteDamage()
     {
         if (igniteDamageTimer < 0)
@@ -296,6 +277,7 @@ public class CharacterStats : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
+        Destroy(gameObject,2f);
     }
 
 
@@ -315,7 +297,7 @@ public class CharacterStats : MonoBehaviour
 
     private int CheckTargetResistance(CharacterStats _targetStats, int totalMagicalDamage)
     {
-        totalMagicalDamage -= _targetStats.magicResistance.GetValue() + (_targetStats.intelligence.GetValue() * 3);
+        //totalMagicalDamage -= _targetStats.magicResistance.GetValue() + (_targetStats.intelligence.GetValue() * 3);
         totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
         return totalMagicalDamage;
     }

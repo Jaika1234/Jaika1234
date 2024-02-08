@@ -17784,7 +17784,8 @@ MonoBehaviour:
   hitMat: {fileID: 2100000, guid: 78758ed07969e5449922bd9487087aa7, type: 2}
   igniteColor: []
   chillColor: []
-  shockColor: []
+  shockColor:
+  - {r: 1, g: 0.913718, b: 0, a: 0}
 --- !u!114 &1195560134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24776,6 +24777,18 @@ PrefabInstance:
     - target: {fileID: 4341065411780662698, guid: 24eaebd76fcafb34aa32c13ea5210571, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548489130189842106, guid: 24eaebd76fcafb34aa32c13ea5210571, type: 3}
+      propertyPath: shockColor.Array.data[0].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548489130189842106, guid: 24eaebd76fcafb34aa32c13ea5210571, type: 3}
+      propertyPath: shockColor.Array.data[0].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548489130189842106, guid: 24eaebd76fcafb34aa32c13ea5210571, type: 3}
+      propertyPath: shockColor.Array.data[0].r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
