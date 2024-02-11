@@ -266,6 +266,19 @@ public class CharacterStats : MonoBehaviour
             Die();
     }
 
+    public virtual void IncreaseHealthBy(int _healAmount)
+    {
+        currentHealth+= _healAmount;
+
+        if(currentHealth > GetMaxHealthValue())
+            currentHealth = GetMaxHealthValue();
+
+        if(onHealthChanged != null) 
+            onHealthChanged();
+
+
+    }
+
     protected virtual void DecreaseHealthBy(int _damage)
     {
         currentHealth -= _damage;
@@ -277,7 +290,6 @@ public class CharacterStats : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
-        Destroy(gameObject,2f);
     }
 
 
