@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentTpye
+public enum EquipmentType
 {
     Weapon,
     Armor,
@@ -11,7 +11,7 @@ public enum EquipmentTpye
 [CreateAssetMenu(fileName = "New Item Data", menuName = "Data/Equipment")]
 public class ItemData_Equipment : ItemData
 {
-    public EquipmentTpye equipmentTpye;
+    public EquipmentType equipmentTpye;
 
     public float itemCooldown;
     public ItemEffect[] itemEffects;

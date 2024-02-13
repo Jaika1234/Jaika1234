@@ -1,5 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
+public enum StatType
+{
+    strength,
+    agility,
+    intelligence,
+    vitality,
+    damage,
+    critChance,
+    critPower,
+    maxHealth,
+    armor,
+    evasion,
+    magicResistance,
+    fireDamage,
+    iceDamage,
+    lightingDamage
+}
 public class CharacterStats : MonoBehaviour
 {
     private EntityFX fx;
@@ -78,7 +96,18 @@ public class CharacterStats : MonoBehaviour
             ApplyIgniteDamage();
     }
 
+    public virtual void IncreaseStatBy(int _modifier, float _duration, Stat _statTomodify)
+    {
+        StartCoroutine(StatModCoroutine(_modifier, _duration, _statTomodify));
+    }
 
+    private IEnumerator StatModCoroutine(int _modifier, float _duration, Stat _statTomodify)
+    {
+        _statTomodify.AddModifier(_modifier);
+        yield return new WaitForSeconds(_duration);
+        _statTomodify.RemoveModifier(_modifier);
+
+    }
 
     public virtual void DoDamage(CharacterStats _targetStats)
     {
@@ -114,7 +143,7 @@ public class CharacterStats : MonoBehaviour
         int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage + intelligence.GetValue();
 
         totalMagicalDamage = CheckTargetResistance(_targetStats, totalMagicalDamage);
-        _targetStats.TakeDamage(totalMagicalDamage);    
+        _targetStats.TakeDamage(totalMagicalDamage);
 
 
         if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
@@ -268,12 +297,12 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void IncreaseHealthBy(int _healAmount)
     {
-        currentHealth+= _healAmount;
+        currentHealth += _healAmount;
 
-        if(currentHealth > GetMaxHealthValue())
+        if (currentHealth > GetMaxHealthValue())
             currentHealth = GetMaxHealthValue();
 
-        if(onHealthChanged != null) 
+        if (onHealthChanged != null)
             onHealthChanged();
 
 
@@ -356,4 +385,42 @@ public class CharacterStats : MonoBehaviour
     }
 
     #endregion
+
+
+    public Stat GetStat(StatType _statType)
+    {
+        switch (_statType)
+        {
+            case StatType.strength:
+                return strength;
+            case StatType.agility:
+                return agility;
+            case StatType.intelligence:
+                return intelligence;
+            case StatType.vitality:
+                return vitality;
+            case StatType.damage:
+                return damage;
+            case StatType.critChance:
+                return critChance;
+            case StatType.critPower:
+                return critPower;
+            case StatType.maxHealth:
+                return maxHealth;
+            case StatType.armor:
+                return armor;
+            case StatType.evasion:
+                return evasion;
+            case StatType.magicResistance:
+                return magicResistance;
+            case StatType.fireDamage:
+                return fireDamage;
+            case StatType.iceDamage:
+                return iceDamage;
+            case StatType.lightingDamage:
+                return lightingDamage;
+            default:
+                return null;
+        }
+    }
 }

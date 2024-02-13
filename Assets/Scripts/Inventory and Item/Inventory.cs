@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
 
+    public List<ItemData> startingItems;
+
     public List<InventoryItem> equipment;
     public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
 
@@ -15,17 +17,20 @@ public class Inventory : MonoBehaviour
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
 
     public List<InventoryItem> stash;
-    public Dictionary<ItemData,InventoryItem> stashDictionary;
+    public Dictionary<ItemData, InventoryItem> stashDictionary;
 
     [Header("Inventory UI")]
 
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipmentParent;
+    [SerializeField] private Transform statSlotParent;
 
     private UI_ItemSlot[] inventoryItemSlot;
     private UI_ItemSlot[] stashItemSlot;
     private UI_EquipmentSlot[] equipmentSlot;
+    private UI_StatSlot[] statSlot;
+
 
     [Header("Items cooldown")]
     private float flaskCooldown;
@@ -54,6 +59,7 @@ public class Inventory : MonoBehaviour
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         stashItemSlot = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentParent.GetComponentsInChildren<UI_EquipmentSlot>();  
+        statSlot=statSlotParent.GetComponentsInChildren<UI_StatSlot>();
     }
 
     public void EquipItem(ItemData _item)
@@ -70,7 +76,7 @@ public class Inventory : MonoBehaviour
         }
         if(OldEquipment!= null)
         {
-            Unequipment(OldEquipment);
+            UnequipItem(OldEquipment);
             AddItem(OldEquipment);
         }
        
@@ -83,7 +89,7 @@ public class Inventory : MonoBehaviour
         UpdateSlotUI();
     }
 
-    public void Unequipment(ItemData_Equipment itemToRemove)
+    public void UnequipItem(ItemData_Equipment itemToRemove)
     {
         if (equipmentDictionary.TryGetValue(itemToRemove, out InventoryItem value))
         {
@@ -122,6 +128,13 @@ public class Inventory : MonoBehaviour
         {
             stashItemSlot[i].UpdataSlot(stash[i]);
         }
+
+        for(int i = 0; i <statSlot.Length; i++)
+        {
+
+            statSlot[i].UpdateStatValueUI();
+        }
+
     }
 
     public void AddItem(ItemData _item)
@@ -224,7 +237,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public ItemData_Equipment GetEquipment(EquipmentTpye _type)
+    public ItemData_Equipment GetEquipment(EquipmentType _type)
     {
         ItemData_Equipment equipmentItem = null;
         foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
@@ -236,7 +249,7 @@ public class Inventory : MonoBehaviour
     }
     public void UseFlask()
     {
-        ItemData_Equipment currentFlask = GetEquipment(EquipmentTpye.Flask);
+        ItemData_Equipment currentFlask = GetEquipment(EquipmentType.Flask);
 
         if (currentFlask == null)
             return;

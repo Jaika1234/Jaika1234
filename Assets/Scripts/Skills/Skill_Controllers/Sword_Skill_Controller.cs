@@ -215,7 +215,7 @@ public class Sword_Skill_Controller : MonoBehaviour
         player.stats.DoDamage(enemy.GetComponent<CharacterStats>());
         enemy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
 
-        ItemData_Equipment weaponData = Inventory.instance.GetEquipment(EquipmentTpye.Weapon);
+        ItemData_Equipment weaponData = Inventory.instance.GetEquipment(EquipmentType.Weapon);
         //装備品のアタック効果ここに
         if (weaponData != null)
             weaponData.Effect(enemy.transform);
