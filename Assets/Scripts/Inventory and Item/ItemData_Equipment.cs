@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EquipmentType
@@ -41,6 +42,7 @@ public class ItemData_Equipment : ItemData
     [Header("Craft requirements")]
     public List<InventoryItem> craftingMaterials;
 
+    private int discriptionLength;
     public void Effect(Transform _enemyPosition)
     {
         foreach(var item in itemEffects)
@@ -93,6 +95,59 @@ public class ItemData_Equipment : ItemData
         playerStats.iceDamage.RemoveModifier(iceDamage);
         playerStats.lightingDamage.RemoveModifier(lightingDamage);
 
+    }
+
+    public override string GetDiscription()
+    {
+        sb.Length = 0;
+        discriptionLength = 0;
+        // Major stats
+        AddItemDiscription(strength, "Strength");
+        AddItemDiscription(agility, "Agility");
+        AddItemDiscription(intelligence, "Intelligence");
+        AddItemDiscription(vitality, "Vitality");
+
+        // Offensive stats
+        AddItemDiscription(damage, "Damage");
+        AddItemDiscription(critChance, "Critical Chance");
+        AddItemDiscription(critPower, "Critical Power");
+
+        // Defensive stats
+        AddItemDiscription(maxHealth, "Max Health");
+        AddItemDiscription(armor, "Armor");
+        AddItemDiscription(evasion, "Evasion");
+        AddItemDiscription(magicResistance, "Magic Resistance");
+
+        // Magic stats
+        AddItemDiscription(fireDamage, "Fire Damage");
+        AddItemDiscription(iceDamage, "Ice Damage");
+        AddItemDiscription(lightingDamage, "Lightning Damage");
+
+        if(discriptionLength< 5)
+        {
+            for(int i = 0; i<5-discriptionLength;i++)
+            {
+                sb.AppendLine();
+                sb.Append("");
+
+            }
+        }
+
+
+        return sb.ToString();
+    }
+    private void AddItemDiscription(int _value,string _name)
+    {
+        if(_value != 0)
+        {
+            if (sb.Length > 0)
+                sb.AppendLine();
+
+            if (_value > 0)
+                sb.Append(_name + ":" + _value);
+
+            discriptionLength++;
+        }
     }
 
 }

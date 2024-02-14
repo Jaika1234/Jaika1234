@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject characterUI;
+    public UI_ItemToolTip itemToolTip;
+   void Start()
     {
-        
+        //itemToolTip= GetComponentInChildren<UI_ItemToolTip>();
     }
-
-    // Update is called once per frame
-    void Update()
+   void Update()
     {
         
     }
