@@ -60,7 +60,19 @@ public class Inventory : MonoBehaviour
         stashItemSlot = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentParent.GetComponentsInChildren<UI_EquipmentSlot>();  
         statSlot=statSlotParent.GetComponentsInChildren<UI_StatSlot>();
+        AddStartingItems();
+
+        UpdateSlotUI();
     }
+    private void AddStartingItems()
+    {
+        for (int i = 0; i < startingItems.Count; i++)
+        {
+            if (startingItems[i] != null)
+                AddItem(startingItems[i]);
+        }
+    }
+
 
     public void EquipItem(ItemData _item)
     {

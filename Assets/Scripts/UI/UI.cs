@@ -1,18 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class UI : MonoBehaviour
 {
     [SerializeField] private GameObject characterUI;
+    [SerializeField] private GameObject skillUI;
+    [SerializeField] private GameObject craftUI;
+    [SerializeField] private GameObject optionUI;
+    [SerializeField] private GameObject ingameUI;
+
+
+
     public UI_ItemToolTip itemToolTip;
+    public UI_StatToolTip statToolTip;
    void Start()
     {
-        //itemToolTip= GetComponentInChildren<UI_ItemToolTip>();
+        SwitchTo(ingameUI);
+
+        itemToolTip.gameObject.SetActive(false);
+        statToolTip.gameObject.SetActive(false);
+
     }
    void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.C))
+            SwitchWithKeyTo(characterUI);
+        if (Input.GetKeyDown(KeyCode.O))
+            SwitchWithKeyTo(optionUI);
+        if (Input.GetKeyDown(KeyCode.B))
+            SwitchWithKeyTo(craftUI);
+        if (Input.GetKeyDown(KeyCode.K))
+            SwitchWithKeyTo(skillUI);
+
+
+
     }
 
     public void SwitchTo(GameObject _menu)
@@ -24,5 +47,27 @@ public class UI : MonoBehaviour
         if (_menu != null)
             _menu.SetActive(true);
     }
+
+    public void SwitchWithKeyTo(GameObject _menu)
+    {
+        if(_menu != null && _menu.activeSelf)
+        {
+            _menu.SetActive(false);
+            CheckForInGameUI();
+            return;
+        }
+        SwitchTo(_menu);
+    }
+    public void CheckForInGameUI()
+    {
+        for(int i = 0;i<transform.childCount;i++)
+        {
+            if (transform.GetChild(i).gameObject.activeSelf)
+                return;
+        }
+        SwitchTo(ingameUI);
+    }
+         
+
 
 }

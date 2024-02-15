@@ -14,8 +14,13 @@ public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentTpye;
 
+    [Header("Unique effect")]
     public float itemCooldown;
     public ItemEffect[] itemEffects;
+    [TextArea]
+    public string itemEffectDscription;
+
+
 
     [Header("Major stats")]
     public int strength; // 1 point increase damage by 1 and crit.power by 1%
@@ -133,6 +138,12 @@ public class ItemData_Equipment : ItemData
             }
         }
 
+        if(itemEffectDscription.Length > 0)
+        {
+            sb.AppendLine();
+            sb.Append(itemEffectDscription);
+
+        }
 
         return sb.ToString();
     }
@@ -144,7 +155,7 @@ public class ItemData_Equipment : ItemData
                 sb.AppendLine();
 
             if (_value > 0)
-                sb.Append(_name + ":" + _value);
+                sb.Append("+ " + _value + " " + _name);
 
             discriptionLength++;
         }

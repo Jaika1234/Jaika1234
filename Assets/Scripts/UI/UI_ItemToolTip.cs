@@ -9,6 +9,9 @@ public class UI_ItemToolTip : MonoBehaviour
 
     public void ShowToolTip(ItemData_Equipment _item)
     {
+        if(_item == null)
+            return;
+
         itemNameText.text = _item.itemName;
         itemTypeText.text = _item.equipmentTpye.ToString();
         itemDescription.text = _item.GetDiscription();
