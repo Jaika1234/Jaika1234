@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,23 +7,38 @@ public class UI_InGame : MonoBehaviour
     [SerializeField] private Slider slider;
 
     [SerializeField] private Image dashImage;
-    [SerializeField] private float dashCooldown;
+    [SerializeField] private Image parryImage;
+    [SerializeField] private Image swordImage;
+    [SerializeField] private Image flaskImage;
+ 
+    private SkillManager skills;
 
     private void Start()
     {
-        if(playerStats!= null)
+        if (playerStats != null)
             playerStats.onHealthChanged += upDateHealthUI;
 
-        dashCooldown = SkillManager.instance.dash.cooldown;
-
+        skills = SkillManager.instance;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
             SetCooldownOf(dashImage);
 
-        CheckCooldownof(dashImage,dashCooldown);
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+            SetCooldownOf(swordImage);
 
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipment(EquipmentType.Flask) != null)
+        {
+            Debug.Log("flask is cool down"+ Inventory.instance.flaskCooldown);
+            SetCooldownOf(flaskImage);
+        }
+            
+
+
+        CheckCooldownof(dashImage, skills.dash.cooldown);
+        CheckCooldownof(swordImage, skills.sword.cooldown);
+        CheckCooldownof(flaskImage, Inventory.instance.flaskCooldown);
     }
 
     private void upDateHealthUI()
@@ -40,10 +52,10 @@ public class UI_InGame : MonoBehaviour
             _image.fillAmount = 1;
     }
 
-    private void CheckCooldownof(Image _image,float _cooldown)
+    private void CheckCooldownof(Image _image, float _cooldown)
     {
-        if (_image.fillAmount >0 )
-            _image.fillAmount -= 1 /_cooldown *Time.deltaTime; 
+        if (_image.fillAmount > 0)
+            _image.fillAmount -= 1 / _cooldown * Time.deltaTime;
     }
 
 

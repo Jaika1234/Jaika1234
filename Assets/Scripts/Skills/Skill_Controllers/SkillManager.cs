@@ -10,6 +10,7 @@ public class SkillManager : MonoBehaviour
     public Dash_Skill dash { get; private set; }
     public Clone_Skill clone { get; private set; }
     public Sword_Skill sword { get; private set; }
+
    // public Blackhole_Skill blackhole { get; private set; }
     //public Crystal_Skill crystal { get; private set; }
 

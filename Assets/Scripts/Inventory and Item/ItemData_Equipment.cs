@@ -138,7 +138,7 @@ public class ItemData_Equipment : ItemData
             }
         }
 
-        if(itemEffectDscription.Length > 0)
+        if(itemEffectDscription.Length > 1)
         {
             sb.AppendLine();
             sb.Append(itemEffectDscription);

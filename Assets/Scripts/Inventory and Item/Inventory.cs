@@ -32,8 +32,8 @@ public class Inventory : MonoBehaviour
     private UI_StatSlot[] statSlot;
 
 
+    public float flaskCooldown { get; private set; }
     [Header("Items cooldown")]
-    private float flaskCooldown;
     private float lastTimeUsedFlask;
 
 
@@ -276,10 +276,11 @@ public class Inventory : MonoBehaviour
         if (currentFlask == null)
             return;
 
-        bool canUseFlask = Time.time > lastTimeUsedFlask + currentFlask.itemCooldown;
+        bool canUseFlask = Time.time > lastTimeUsedFlask + flaskCooldown;
 
         if (canUseFlask)
         {
+            flaskCooldown = currentFlask.itemCooldown;
             currentFlask.Effect(null);
             lastTimeUsedFlask = Time.time;
         }

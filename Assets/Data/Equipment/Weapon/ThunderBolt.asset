@@ -17,8 +17,10 @@ MonoBehaviour:
   icon: {fileID: -1868606538, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 0
   equipmentTpye: 0
+  itemCooldown: 0
   itemEffects:
   - {fileID: 11400000, guid: d5d1e997933d81f4aad800a7ea940a40, type: 2}
+  itemEffectDscription: Lightning Strike with attack
   strength: 0
   agility: 0
   intelligence: 0
