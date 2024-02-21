@@ -1,7 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(EnemyStats))]
+[RequireComponent(typeof(EntityFX))]
+[RequireComponent(typeof(ItemDrop))]
 
 public class Enemy : Entity
 {
@@ -25,7 +29,7 @@ public class Enemy : Entity
     public float attackCooldown;
     [HideInInspector] public float lastTimeAttacked;
 
-   
+
     public EnemyStateMachine stateMachine { get; private set; }
     public string lastAnimBoolName { get; private set; }
     protected override void Awake()
@@ -96,6 +100,9 @@ public class Enemy : Entity
         return false;
     }
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+    public virtual void AnimationSpecialAttackTrigger()
+    {
+    }
 
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50, whatIsPlayer);
 

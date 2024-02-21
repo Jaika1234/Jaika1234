@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.Accessibility;
 
 public class Entity : MonoBehaviour
 {
@@ -17,7 +14,7 @@ public class Entity : MonoBehaviour
     #endregion
 
     [Header("Knockback info")]
-    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected Vector2 knockbackPower;
     [SerializeField] protected float knockbackDuration;
     protected bool isKnocked;
 
@@ -32,6 +29,8 @@ public class Entity : MonoBehaviour
 
     public int facingDir { get; private set; } = 1;
     protected bool facingRight = true;
+
+    public int knockbackDir { get; private set; }
 
     public System.Action onFlipped;
     protected virtual void Awake()
@@ -66,11 +65,20 @@ public class Entity : MonoBehaviour
         anim.speed = 1;
     }
     public virtual void DamageImpact() => StartCoroutine("HitKnockback");
+
+    public virtual void SetupKnockbackDir(Transform _damageDir)
+    {
+        if (_damageDir.position.x > transform.position.x)
+            knockbackDir = -1;
+        else if (_damageDir.position.x < transform.position.x)
+            knockbackDir = 1;
+
+    }
     protected virtual IEnumerator HitKnockback()
     {
         isKnocked = true;
 
-        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y); 
+        rb.velocity = new Vector2(knockbackPower.x * knockbackDir, knockbackPower.y);
         yield return new WaitForSeconds(knockbackDuration);
 
         isKnocked = false;
@@ -115,8 +123,8 @@ public class Entity : MonoBehaviour
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
 
-        if(onFlipped != null)
-        onFlipped();
+        if (onFlipped != null)
+            onFlipped();
 
     }
 
@@ -126,6 +134,14 @@ public class Entity : MonoBehaviour
             Flip();
         else if (_x < 0 && facingRight)
             Flip();
+    }
+
+    public virtual void SetupDefailtFacingDir(int _direction)
+    {
+        facingDir = _direction;
+
+        if (facingDir == -1)
+            facingRight = false;
     }
     #endregion
 

@@ -17,7 +17,10 @@ MonoBehaviour:
   icon: {fileID: 998750072, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 26
   equipmentTpye: 0
+  itemCooldown: 0
   itemEffects: []
+  itemEffectDscription: 
+  swordType: 2
   strength: 0
   agility: 0
   intelligence: 0

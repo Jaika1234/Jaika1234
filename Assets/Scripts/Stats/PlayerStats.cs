@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStats : CharacterStats
 {
     private Player player;
+    
 
     protected override void Start()
     {

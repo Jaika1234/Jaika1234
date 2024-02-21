@@ -64,8 +64,9 @@ public class CharacterStats : MonoBehaviour
     public int currentHealth;
 
     public System.Action onHealthChanged;
-    protected bool isDead;
+    public bool isDead;
 
+    public bool isInvincible { get; private set; }
     protected virtual void Start()
     {
         critPower.SetDefaultValue(150);
@@ -114,6 +115,8 @@ public class CharacterStats : MonoBehaviour
         if (TargetCanAvoidAttack(_targetStats))
             return;
 
+        _targetStats.GetComponent<Entity>().SetupKnockbackDir(transform);
+
         int totalDamage = damage.GetValue() + strength.GetValue();
 
         if (CanCrit())
@@ -125,8 +128,6 @@ public class CharacterStats : MonoBehaviour
 
         totalDamage = CheckTargetArmor(_targetStats, totalDamage);
         _targetStats.TakeDamage(totalDamage);
-
-        // then DoMagicalDamage(_targetStats);
 
     }
 
@@ -154,21 +155,21 @@ public class CharacterStats : MonoBehaviour
 
     }
 
-    public virtual void DoEffectDamage(CharacterStats _targetStats)
-    {
-        int _fireDamage = fireDamage.GetValue();
-        int _iceDamage = iceDamage.GetValue();
-        int _lightingDamage = lightingDamage.GetValue();
+    //public virtual void DoEffectDamage(CharacterStats _targetStats)
+    //{
+    //    int _fireDamage = fireDamage.GetValue();
+    //    int _iceDamage = iceDamage.GetValue();
+    //    int _lightingDamage = lightingDamage.GetValue();
 
-        int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage;
+    //    int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage;
 
-        if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
-            return;
-        AttemptyToApplyAilements(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
+    //    if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
+    //        return;
+    //    AttemptyToApplyAilements(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
 
-        _targetStats.TakeDamage(totalMagicalDamage);
+    //    _targetStats.TakeDamage(totalMagicalDamage);
 
-    }
+    //}
 
     private void AttemptyToApplyAilements(CharacterStats _targetStats, int _fireDamage, int _iceDamage, int _lightingDamage)
     {
@@ -286,6 +287,9 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int _damage)
     {
+        if (isInvincible)
+            return;
+
         DecreaseHealthBy(_damage);
 
         GetComponent<Entity>().DamageImpact();
@@ -320,7 +324,13 @@ public class CharacterStats : MonoBehaviour
     {
         isDead = true;
     }
+    public void KillEntity()
+    {
+        if (!isDead)
+         Die();
+    } 
 
+    public void MakeInvincible(bool _invincible) => isInvincible= _invincible;
 
     #region Stat calculations
     private int CheckTargetArmor(CharacterStats _targetStats, int totalDamage)

@@ -53,10 +53,4 @@ public class Enemy_Skeleton : Enemy
         base.Die(); 
         stateMachine.ChangeState(deadState);
     }
-    private IEnumerator IdleAfterHit()
-    {
-        yield return new WaitForSeconds(1.2f);
-        stateMachine.ChangeState(idleState); 
-
-    }
 }

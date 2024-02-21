@@ -46,6 +46,16 @@ public class UI : MonoBehaviour
         }
         if (_menu != null)
             _menu.SetActive(true);
+
+        if(_menu == ingameUI)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
+
+
+
+
+
     }
 
     public void SwitchWithKeyTo(GameObject _menu)

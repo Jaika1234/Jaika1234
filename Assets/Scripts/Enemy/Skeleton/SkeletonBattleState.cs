@@ -20,6 +20,9 @@ public class SkeletonBattleState : EnemyState
 
         player = PlayerManager.instance.player.transform;
 
+        if (player.GetComponent<PlayerStats>().isDead)
+            stateMachine.ChangeState(enemy.moveState);
+
         
     }
 

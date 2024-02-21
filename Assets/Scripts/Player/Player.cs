@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Player : Entity
 {
@@ -66,7 +67,6 @@ public class Player : Entity
         aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
         catchSword = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
         deadState = new PlayerDeadState(this, stateMachine, "Die");
-        //blackHole = new PlayerBlackholeState(this, stateMachine, "Jump");
     }
 
     protected override void Start()
@@ -84,6 +84,9 @@ public class Player : Entity
 
     protected override void Update()
     {
+        if (Time.timeScale == 0)
+            return;
+
         base.Update();
 
         stateMachine.currentState.Update();
@@ -92,10 +95,7 @@ public class Player : Entity
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Inventory.instance.UseFlask();
-            
 
-        //if (Input.GetKeyDown(KeyCode.F))
-        //    skill.crystal.CanUseSkill();
     }
 
     public void AssignNewSword(GameObject _newSword)
@@ -140,6 +140,14 @@ public class Player : Entity
     {
         base.Die();
         stateMachine.ChangeState(deadState);
+        StartCoroutine(EndScreen());
+        
+    }
+
+    IEnumerator EndScreen()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        SceneManager.LoadScene("EndGame");
     }
 
 }

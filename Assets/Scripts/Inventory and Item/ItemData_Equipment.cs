@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EquipmentType
@@ -20,7 +19,8 @@ public class ItemData_Equipment : ItemData
     [TextArea]
     public string itemEffectDscription;
 
-
+    [Header("Sword Skill Type(only weapon)")]
+    public SwordType swordType;
 
     [Header("Major stats")]
     public int strength; // 1 point increase damage by 1 and crit.power by 1%
@@ -50,9 +50,9 @@ public class ItemData_Equipment : ItemData
     private int discriptionLength;
     public void Effect(Transform _enemyPosition)
     {
-        foreach(var item in itemEffects)
+        foreach (var item in itemEffects)
         {
-            item.ExecuteEffect( _enemyPosition);
+            item.ExecuteEffect(_enemyPosition);
         }
     }
     public void AddModifiers()
@@ -128,9 +128,9 @@ public class ItemData_Equipment : ItemData
         AddItemDiscription(iceDamage, "Ice Damage");
         AddItemDiscription(lightingDamage, "Lightning Damage");
 
-        if(discriptionLength< 5)
+        if (discriptionLength < 5)
         {
-            for(int i = 0; i<5-discriptionLength;i++)
+            for (int i = 0; i < 5 - discriptionLength; i++)
             {
                 sb.AppendLine();
                 sb.Append("");
@@ -138,7 +138,7 @@ public class ItemData_Equipment : ItemData
             }
         }
 
-        if(itemEffectDscription.Length > 1)
+        if (itemEffectDscription.Length > 1)
         {
             sb.AppendLine();
             sb.Append(itemEffectDscription);
@@ -147,9 +147,9 @@ public class ItemData_Equipment : ItemData
 
         return sb.ToString();
     }
-    private void AddItemDiscription(int _value,string _name)
+    private void AddItemDiscription(int _value, string _name)
     {
-        if(_value != 0)
+        if (_value != 0)
         {
             if (sb.Length > 0)
                 sb.AppendLine();

@@ -21,6 +21,7 @@ MonoBehaviour:
   itemEffects:
   - {fileID: 11400000, guid: cb8349b0180c9e2499038acb444a6f33, type: 2}
   itemEffectDscription: Increase Damage with Each Attack
+  swordType: 3
   strength: 3
   agility: 0
   intelligence: 0

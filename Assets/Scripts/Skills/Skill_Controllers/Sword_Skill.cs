@@ -87,7 +87,6 @@ public class Sword_Skill : Skill
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         Sword_Skill_Controller newSwordScript = newSword.GetComponent<Sword_Skill_Controller>();
 
-
         if (swordType == SwordType.Bounce)
             newSwordScript.SetupBounce(true, bounceAmount,bounceSpeed);
         else if (swordType == SwordType.Pierce)

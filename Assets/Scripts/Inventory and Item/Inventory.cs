@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 
 public class Inventory : MonoBehaviour
@@ -98,6 +97,12 @@ public class Inventory : MonoBehaviour
         newEquipment.AddModifiers();
         RemoveItem(_item);
 
+        if (newEquipment.equipmentTpye == EquipmentType.Weapon) 
+        {
+            SkillManager.instance.sword.swordType = newEquipment.swordType;
+        }
+
+
         UpdateSlotUI();
     }
 
@@ -108,6 +113,11 @@ public class Inventory : MonoBehaviour
             equipment.Remove(value);
             equipmentDictionary.Remove(itemToRemove);
             itemToRemove.RemoveModifiers();
+        }
+
+        if (itemToRemove.equipmentTpye == EquipmentType.Weapon)
+        {
+            SkillManager.instance.sword.swordType = SwordType.Regular;
         }
     }
 
