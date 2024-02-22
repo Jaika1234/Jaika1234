@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy_DeathBringer : Enemy
 {
@@ -13,11 +15,26 @@ public class Enemy_DeathBringer : Enemy
     public DeathBringerDeadState deadState { get; private set; }
     //public DeathBringerStunnedState stunnedState { get; private set; }
     #endregion
+    public bool boosFightBegun;
+
+
+    [Header("Spell Cast Details")]
+    [SerializeField] private GameObject spellPrefab;
+    [SerializeField] protected GameObject skeletonPrefab;
+    public bool canSummonSkeleton = true;
+    public int amountOfSpell;
+    public float spellCooldown;
+    public float lastTimeCast;
+    [SerializeField] private float spellStateCooldown;
 
 
     [Header("Teleport details")]
     [SerializeField] private BoxCollider2D arena;
     [SerializeField] private Vector2 surroundingCheckSize ;
+    public float chanceToTeleport;
+    public float deafultChanceToTeleport = 30f;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -60,6 +77,25 @@ public class Enemy_DeathBringer : Enemy
         stateMachine.ChangeState(deadState);
     }
 
+    public void CastSpell()
+    {
+        Player player = PlayerManager.instance.player;
+
+        float xOffset = 0;
+
+        if (player.rb.velocity.x != 0)
+            xOffset = player.facingDir * 2.5f;
+
+        Vector3 spellPosition = new(player.transform.position.x + xOffset , player.transform.position.y + 1.5f);
+
+        GameObject newSpell = Instantiate(spellPrefab,spellPosition,Quaternion.identity);
+        if (canSummonSkeleton)
+        {
+            GameObject newSkeleton = Instantiate(skeletonPrefab, spellPosition, Quaternion.identity);
+        }
+
+        newSpell.GetComponent<DeathBringerSpell_Controller>().SetupSpell(stats);
+    }
     public void FindPosition()
     {
         float x = Random.Range(arena.bounds.min.x + 3, arena.bounds.max.x - 3);
@@ -82,6 +118,26 @@ public class Enemy_DeathBringer : Enemy
         base.OnDrawGizmos();
         Gizmos.DrawLine(transform.position,new Vector3 (transform.position.x,transform.position.y - GroundBelow().distance));
         Gizmos.DrawWireCube(transform.position, surroundingCheckSize);
+    }
+
+    public bool CanTeleport()
+    {
+        if (Random.Range(0, 100) <= chanceToTeleport)
+        {
+            chanceToTeleport = deafultChanceToTeleport;
+            return true;
+        }
+            
+        return false;
+    }
+
+    public bool CanDoSpellCast()
+    {
+        if (Time.time >= lastTimeCast + spellStateCooldown)
+        {
+            return true;
+        }
+        return false;
     }
 
 }

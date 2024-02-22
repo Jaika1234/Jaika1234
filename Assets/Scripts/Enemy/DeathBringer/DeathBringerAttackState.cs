@@ -13,6 +13,7 @@ using UnityEngine;
     public override void Enter()
     {
         base.Enter();
+        enemy.chanceToTeleport += 5;
     }
 
     public override void Exit()
@@ -28,8 +29,13 @@ using UnityEngine;
 
         enemy.SetZeroVelocity();
 
-        if (triggerCalled)
-            stateMachine.ChangeState(enemy.teleportState);
+        if (triggerCalled) 
+        { 
+            if(enemy.CanTeleport())
+                stateMachine.ChangeState(enemy.teleportState);
+            else
+                stateMachine.ChangeState(enemy.battleState);
+        }
     }
 
 

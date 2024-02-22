@@ -146,7 +146,7 @@ public class Player : Entity
 
     IEnumerator EndScreen()
     {
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(2.5f);
         SceneManager.LoadScene("EndGame");
     }
 
