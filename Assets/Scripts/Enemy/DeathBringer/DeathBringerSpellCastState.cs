@@ -17,6 +17,8 @@ public class DeathBringerSpellCastState : EnemyState
         amountOfSpells = enemy.amountOfSpell;
         spellTimer =  0.5f;
 
+        if (enemy.transform.position.y > 4f)
+            RefreshSpell();
     }
 
     public override void Exit()
@@ -24,7 +26,6 @@ public class DeathBringerSpellCastState : EnemyState
         base.Exit();
         enemy.lastTimeCast = Time.time;
         enemy.canSummonSkeleton = true;
-        Debug.Log(enemy.lastTimeCast);
     }
 
     public override void Update()
@@ -44,7 +45,7 @@ public class DeathBringerSpellCastState : EnemyState
     }
     private bool CanCast()
     {
-        if (amountOfSpells > 0 && spellTimer < 0)
+        if (amountOfSpells > 0 && spellTimer <= 0)
         {
             amountOfSpells--;
             spellTimer = enemy.spellCooldown;
@@ -52,6 +53,10 @@ public class DeathBringerSpellCastState : EnemyState
         }
         return false;
     }
-
+    public void RefreshSpell()
+    {
+        amountOfSpells = enemy.amountOfSpell;
+        spellTimer = 0;
+    }
 
 }

@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EntityFX : MonoBehaviour
 {
-
+    private Player player;
     private SpriteRenderer sr;
+
+    [Header("Pop Up Text")]
+    [SerializeField] private GameObject popUpTextPrefab;
 
     [Header("Flash FX")]
     [SerializeField] private float flashDuration;
@@ -25,9 +29,23 @@ public class EntityFX : MonoBehaviour
         myHealthBar = GetComponentInChildren<UI_HealthBar>().gameObject;
         sr = GetComponentInChildren<SpriteRenderer>();
         originalMat = sr.material;
+        player = PlayerManager.instance.player;
 
         //myHealthBar = GetComponentInChildren<UI_HealthBar>().gameObject;
     }
+
+    public void CreatePopUpText(string _text)
+    {
+        float randomX = Random.Range(-1,1);
+        float randomY = Random.Range(3, 5);
+
+        Vector3 positionOffset = new Vector3(randomX,randomY,0);
+
+        GameObject newText = Instantiate(popUpTextPrefab,transform.position + positionOffset, Quaternion.identity);
+
+        newText.GetComponent<TextMeshPro>().text = _text;
+    }
+
 
     public void MakeTransprent(bool _transprent)
     {

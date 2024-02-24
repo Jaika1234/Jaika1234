@@ -26,13 +26,11 @@ public class DeathBringerBattleState : EnemyState
     public override void Update()
     {
         base.Update();
-        //positiveFightTimer += Time.deltaTime;
-        // When positiveFightTimer over , will do transparent
+        // When battleTime over some value , will do transparent
 
         if (enemy.IsPlayerDetected())
         {
             stateTimer = enemy.battleTime;
-            Debug.Log("Enemy Y Position: " + enemy.transform.position.y);
 
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
@@ -41,12 +39,12 @@ public class DeathBringerBattleState : EnemyState
                 else
                     stateMachine.ChangeState(enemy.idleState);
             }
-            if (enemy.transform.position.y > 8f)//when go high platform will cast spell 
-            {
-                stateMachine.ChangeState(enemy.spellCastState);
-            }
+               
         }
- 
+        if (enemy.transform.position.y > 4f)//when go high platform will cast spell 
+        {
+            stateMachine.ChangeState(enemy.spellCastState);
+        }
 
 
         if (player.position.x > enemy.transform.position.x)

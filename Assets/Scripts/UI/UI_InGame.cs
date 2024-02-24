@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +11,18 @@ public class UI_InGame : MonoBehaviour
     [SerializeField] private Image parryImage;
     [SerializeField] private Image swordImage;
     [SerializeField] private Image flaskImage;
- 
-    private SkillManager skills;
 
+    [SerializeField] private TextMeshProUGUI healthText;
+
+    private SkillManager skills;
     private void Start()
     {
         if (playerStats != null)
             playerStats.onHealthChanged += upDateHealthUI;
 
         skills = SkillManager.instance;
+        healthText = slider.GetComponentInChildren<TextMeshProUGUI>();
+        healthText.text = $"{playerStats.currentHealth} / {playerStats.GetMaxHealthValue()}";
     }
     private void Update()
     {
@@ -45,6 +49,8 @@ public class UI_InGame : MonoBehaviour
     {
         slider.maxValue = playerStats.GetMaxHealthValue();
         slider.value = playerStats.currentHealth;
+
+        healthText.text = $"{playerStats.currentHealth} / {playerStats.GetMaxHealthValue()}";
     }
     private void SetCooldownOf(Image _image)
     {
