@@ -77,6 +77,8 @@ public class ItemData_Equipment : ItemData
         playerStats.iceDamage.AddModifier(iceDamage);
         playerStats.lightingDamage.AddModifier(lightingDamage);
 
+        playerStats.onHealthChanged?.Invoke();
+
     }
     public void RemoveModifiers()
     {
@@ -99,6 +101,10 @@ public class ItemData_Equipment : ItemData
         playerStats.fireDamage.RemoveModifier(fireDamage);
         playerStats.iceDamage.RemoveModifier(iceDamage);
         playerStats.lightingDamage.RemoveModifier(lightingDamage);
+
+
+        playerStats.IncreaseHealthBy(0);//reset health after removed the equipment 
+        playerStats.onHealthChanged?.Invoke();
 
     }
 

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Attack Buff
   m_EditorClassIdentifier: 
   buffType: 4
-  buffAmount: 5
-  buffDuration: 7
+  buffAmount: 2
+  buffDuration: 5

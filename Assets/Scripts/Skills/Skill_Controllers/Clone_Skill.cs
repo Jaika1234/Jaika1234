@@ -59,7 +59,7 @@ public class Clone_Skill : Skill
 
     private IEnumerator CreateCloneWithDelay(Transform _trasnform,Vector3 _offset)
     {
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(.3f);
             CreateClone(_trasnform,_offset);
     }
 }

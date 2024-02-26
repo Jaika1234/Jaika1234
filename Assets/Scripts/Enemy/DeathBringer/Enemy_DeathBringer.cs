@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class Enemy_DeathBringer : Enemy
@@ -33,6 +34,11 @@ public class Enemy_DeathBringer : Enemy
     [SerializeField] private Vector2 surroundingCheckSize ;
     public float chanceToTeleport;
     public float deafultChanceToTeleport = 30f;
+
+
+    [Header("Game Finish")]
+    [SerializeField] private GameObject exitDoor;
+
 
 
     protected override void Awake()
@@ -74,6 +80,8 @@ public class Enemy_DeathBringer : Enemy
     public override void Die()
     {
         base.Die();
+
+        exitDoor.SetActive(true);
         stateMachine.ChangeState(deadState);
     }
 

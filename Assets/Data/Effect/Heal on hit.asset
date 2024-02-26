@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b542fdb03a142e4cb8e3ee82fbf1978, type: 3}
   m_Name: Heal on hit
   m_EditorClassIdentifier: 
-  healPercence: 0.14
+  healPercence: 0.05

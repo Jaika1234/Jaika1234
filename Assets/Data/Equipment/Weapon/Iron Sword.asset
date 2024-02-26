@@ -15,19 +15,19 @@ MonoBehaviour:
   itemType: 1
   itemName: Iron Sword
   icon: {fileID: 998750072, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
-  dropChance: 26
+  dropChance: 75
   equipmentTpye: 0
   itemCooldown: 0
   itemEffects: []
-  itemEffectDscription: 
+  itemEffectDscription: Simple yet powerful
   swordType: 2
   strength: 0
   agility: 0
   intelligence: 0
   vitality: 0
-  damage: 15
+  damage: 10
   critChance: 25
-  critPower: 125
+  critPower: 50
   maxHealth: 0
   armor: 0
   evasion: 0

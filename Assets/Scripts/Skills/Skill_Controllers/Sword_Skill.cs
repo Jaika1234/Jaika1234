@@ -27,12 +27,12 @@ public class Sword_Skill : Skill
     [SerializeField] private float hitCooldown = .35f;
     [SerializeField] private float maxTravelDistance = 7;
     [SerializeField] private float spinDuration = 2;
-    [SerializeField] private float spinGravity = 1;
+    [SerializeField] private float spinGravity ;
 
     [Header("Skill info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
-    [SerializeField] private float swordGravity;
+    [SerializeField] private float swordGravity = 25f;
     [SerializeField] private float freezeTimeDuration;
     [SerializeField] private float returnSpeed;
 
@@ -75,6 +75,7 @@ public class Sword_Skill : Skill
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
+            SetupGraivty();
             for (int i = 0; i < dots.Length; i++)
             {
                 dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);

@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4085ba1b4d741e944b0b5f9567ec6c3a, type: 3}
-  m_Name: Wood Sword
+  m_Name: Champion Medal
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Wood Sword
-  icon: {fileID: -1055781779, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
-  dropChance: 80
-  equipmentTpye: 0
+  itemName: Champion Medal
+  icon: {fileID: -1920582380, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  dropChance: 100
+  equipmentTpye: 2
   itemCooldown: 0
   itemEffects: []
-  itemEffectDscription: A free gift
+  itemEffectDscription: 
   swordType: 0
-  strength: 2
-  agility: 0
-  intelligence: 0
-  vitality: 0
-  damage: 2
-  critChance: 0
-  critPower: 0
-  maxHealth: 0
-  armor: 0
-  evasion: 0
-  magicResistance: 0
-  fireDamage: 0
-  iceDamage: 0
-  lightingDamage: 0
+  strength: 10
+  agility: 10
+  intelligence: 10
+  vitality: 10
+  damage: 20
+  critChance: 30
+  critPower: 40
+  maxHealth: 50
+  armor: 60
+  evasion: 50
+  magicResistance: 50
+  fireDamage: 5
+  iceDamage: 5
+  lightingDamage: 5
   craftingMaterials: []

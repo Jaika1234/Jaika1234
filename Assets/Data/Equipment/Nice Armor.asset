@@ -15,9 +15,12 @@ MonoBehaviour:
   itemType: 1
   itemName: Nice Armor
   icon: {fileID: -460786257, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
-  dropChance: 27
+  dropChance: 75
   equipmentTpye: 1
+  itemCooldown: 0
   itemEffects: []
+  itemEffectDscription: 
+  swordType: 0
   strength: 0
   agility: 2
   intelligence: 0
@@ -25,7 +28,7 @@ MonoBehaviour:
   damage: 0
   critChance: 0
   critPower: 0
-  maxHealth: 20
+  maxHealth: 150
   armor: 5
   evasion: 0
   magicResistance: 0

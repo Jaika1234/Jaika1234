@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4085ba1b4d741e944b0b5f9567ec6c3a, type: 3}
-  m_Name: Wood Sword
+  m_Name: Metal Ring
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Wood Sword
-  icon: {fileID: -1055781779, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
-  dropChance: 80
-  equipmentTpye: 0
+  itemName: Metal Ring
+  icon: {fileID: -1232294077, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  dropChance: 100
+  equipmentTpye: 2
   itemCooldown: 0
   itemEffects: []
-  itemEffectDscription: A free gift
+  itemEffectDscription: Steel your heart
   swordType: 0
-  strength: 2
+  strength: 0
   agility: 0
   intelligence: 0
   vitality: 0
-  damage: 2
+  damage: 0
   critChance: 0
   critPower: 0
-  maxHealth: 0
-  armor: 0
-  evasion: 0
-  magicResistance: 0
+  maxHealth: 100
+  armor: 5
+  evasion: 15
+  magicResistance: 15
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 0

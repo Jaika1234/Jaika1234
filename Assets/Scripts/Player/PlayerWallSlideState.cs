@@ -41,6 +41,8 @@ public class PlayerWallSlideState : PlayerState
 
         if(player.IsGroundDetected())
                 stateMachine.ChangeState(player.idleState);
+        if(!player.IsWallDetected())
+            stateMachine.ChangeState(player.idleState);
 
     }
 

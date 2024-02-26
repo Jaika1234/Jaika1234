@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4085ba1b4d741e944b0b5f9567ec6c3a, type: 3}
-  m_Name: Wood Sword
+  m_Name: Blood Crescent
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Wood Sword
-  icon: {fileID: -1055781779, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
-  dropChance: 80
+  itemName: Blood Crescent
+  icon: {fileID: -591911314, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  dropChance: 100
   equipmentTpye: 0
   itemCooldown: 0
-  itemEffects: []
-  itemEffectDscription: A free gift
-  swordType: 0
+  itemEffects:
+  - {fileID: 11400000, guid: b520382f461fc664a92833e2adca81cb, type: 2}
+  itemEffectDscription: Life Steal
+  swordType: 2
   strength: 2
-  agility: 0
-  intelligence: 0
-  vitality: 0
-  damage: 2
-  critChance: 0
+  agility: 5
+  intelligence: 5
+  vitality: 5
+  damage: 5
+  critChance: 15
   critPower: 0
   maxHealth: 0
   armor: 0
