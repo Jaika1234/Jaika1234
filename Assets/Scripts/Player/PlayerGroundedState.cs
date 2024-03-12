@@ -24,24 +24,23 @@ public class PlayerGroundedState : PlayerState
         if (!player.IsGroundDetected())
             stateMachine.ChangeState(player.airState);
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
+        if ((Input.GetButtonDown("Fire2")||Input.GetKeyDown(KeyCode.Mouse1)) && HasNoSword())
         {
             stateMachine.ChangeState(player.aimSwordState);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetButtonDown("Counter"))
         {
             stateMachine.ChangeState(player.counterAttack);
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+        if (Input.GetButtonDown("Jump") && player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.jumpState);
         }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetButtonDown("Fire1"))
         {
             stateMachine.ChangeState(player.primaryAttack);
+            Debug.Log("joystickFire1 button pressed");
         }
     }
     private bool HasNoSword()
@@ -50,7 +49,7 @@ public class PlayerGroundedState : PlayerState
         {
             return true;
         }
-        player.sword.GetComponent<Sword_Skill_Controller>().ReturnSword();
+        else player.sword.GetComponent<Sword_Skill_Controller>().ReturnSword();
         {
             return false;
         }

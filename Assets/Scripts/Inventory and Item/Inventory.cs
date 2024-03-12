@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
     public float flaskCooldown { get; private set; }
     [Header("Items cooldown")]
     private float lastTimeUsedFlask;
-
+    protected Player player;
 
     private void Awake()
     {
@@ -45,6 +45,7 @@ public class Inventory : MonoBehaviour
     }
     private void Start()
     {
+        player = PlayerManager.instance.player;
 
         inventory = new List<InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
@@ -294,9 +295,8 @@ public class Inventory : MonoBehaviour
             currentFlask.Effect(null);
             lastTimeUsedFlask = Time.time;
         }
-        else
-            Debug.Log("Flask is cooldown");
-
+        if (!canUseFlask)
+           player.fx.CreatePopUpText("Flask is cooldown",Color.yellow);
     }
 
 }

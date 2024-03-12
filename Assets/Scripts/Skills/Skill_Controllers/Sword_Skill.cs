@@ -69,11 +69,16 @@ public class Sword_Skill : Skill
 
     protected override void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-            finalDir = new Vector2(AimDirection().normalized.x * launchForce.x, AimDirection().normalized.y * launchForce.y);
-
-
+ 
         if (Input.GetKey(KeyCode.Mouse1))
+        {
+            SetupGraivty();
+            for (int i = 0; i < dots.Length; i++)
+            {
+                dots[i].transform.position = DotsPositionMouse(i * spaceBeetwenDots);
+            }
+        }
+        if (Input.GetButton("Fire2"))
         {
             SetupGraivty();
             for (int i = 0; i < dots.Length; i++)
@@ -81,6 +86,17 @@ public class Sword_Skill : Skill
                 dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
             }
         }
+        if ( Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            finalDir = new Vector2(AimDirectionForMouse().normalized.x * launchForce.x, AimDirectionForMouse().normalized.y * launchForce.y);
+        }
+        if (Input.GetButtonUp("Fire2") )
+        {
+            finalDir = new Vector2(AimDirection().normalized.x * launchForce.x, AimDirection().normalized.y * launchForce.y);
+        }
+
+
+
     }
 
     public void CreateSword()
@@ -105,13 +121,22 @@ public class Sword_Skill : Skill
 
 
     #region Aim region
-    public Vector2 AimDirection()
+    public Vector2 AimDirectionForMouse()
     {
         Vector2 playerPosition = player.transform.position;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - playerPosition;
 
         return direction;
+    }
+    public Vector2 AimDirection()
+    {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            Vector2 joystickDirection = new Vector2(horizontalInput, verticalInput).normalized;
+
+            return joystickDirection;
+
     }
 
     public void DotsActive(bool _isActive)
@@ -137,6 +162,15 @@ public class Sword_Skill : Skill
         Vector2 position = (Vector2)player.transform.position + new Vector2(
             AimDirection().normalized.x * launchForce.x,
             AimDirection().normalized.y * launchForce.y) * t + .5f * (Physics2D.gravity * swordGravity) * (t * t);
+
+        return position;
+    }
+
+    private Vector2 DotsPositionMouse(float t)
+    {
+        Vector2 position = (Vector2)player.transform.position + new Vector2(
+            AimDirectionForMouse().normalized.x * launchForce.x,
+            AimDirectionForMouse().normalized.y * launchForce.y) * t + .5f * (Physics2D.gravity * swordGravity) * (t * t);
 
         return position;
     }

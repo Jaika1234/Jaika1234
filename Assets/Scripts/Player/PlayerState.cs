@@ -38,6 +38,14 @@ public class PlayerState
         yInput = Input.GetAxisRaw("Vertical");
         player.anim.SetFloat("yVelocity", rb.velocity.y);
 
+        if (xInput > 0)
+        {
+            xInput = 1;
+        }
+        else if (xInput < 0)
+        {
+            xInput = -1;
+        }
     }
 
     public virtual void Exit()

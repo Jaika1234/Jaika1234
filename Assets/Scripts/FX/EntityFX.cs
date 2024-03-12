@@ -1,12 +1,16 @@
+using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class EntityFX : MonoBehaviour
 {
-    private Player player;
-    private SpriteRenderer sr;
+    protected Player player;
+    protected SpriteRenderer sr;
+    [Header("Screen shake")]
+    [SerializeField] private float shakeMultiplier;
+    [SerializeField] private Vector3 shakePower;
+    private CinemachineImpulseSource screenShake;
 
     [Header("Pop Up Text")]
     [SerializeField] private GameObject popUpTextPrefab;
@@ -22,28 +26,57 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private Color[] chillColor;
     [SerializeField] private Color[] shockColor;
 
+    [Header("After Image FX For Dash")]
+    [SerializeField] private GameObject afterImagePrefab;
+    [SerializeField] private float colorLoseRate;
+    [SerializeField] private float afterImageCooldown;
+    private float afterImageCooldownTimer;
+
     private GameObject myHealthBar;
 
     private void Start()
     {
-        myHealthBar = GetComponentInChildren<UI_HealthBar>().gameObject;
-        sr = GetComponentInChildren<SpriteRenderer>();
-        originalMat = sr.material;
         player = PlayerManager.instance.player;
+        sr = GetComponentInChildren<SpriteRenderer>();
+        screenShake = GetComponent<CinemachineImpulseSource>();
+        originalMat = sr.material;
 
-        //myHealthBar = GetComponentInChildren<UI_HealthBar>().gameObject;
+    }
+    private void Update()
+    {
+        afterImageCooldownTimer -= Time.deltaTime;  
     }
 
-    public void CreatePopUpText(string _text)
+    public void CreateAfterImage()
     {
-        float randomX = Random.Range(-1,1);
+        if (afterImageCooldownTimer < 0) 
+        { 
+        afterImageCooldownTimer = afterImageCooldown;
+        GameObject newAfterImage = Instantiate(afterImagePrefab, transform.position,transform.rotation);
+        newAfterImage.GetComponent<AfterImageFX>().SetupAfterImage(colorLoseRate, sr.sprite);
+        }
+    }
+    public void ScreenShake()
+    {
+        screenShake.m_DefaultVelocity = new Vector3(shakePower.x * player.facingDir, shakePower.y) * shakeMultiplier;
+        screenShake.GenerateImpulse();
+    }
+
+
+    public void CreatePopUpText(string _text, Color _color)
+    {
+        float randomX = Random.Range(-1, 1);
         float randomY = Random.Range(3, 5);
 
-        Vector3 positionOffset = new Vector3(randomX,randomY,0);
+        Vector3 positionOffset = new Vector3(randomX, randomY, 0);
 
-        GameObject newText = Instantiate(popUpTextPrefab,transform.position + positionOffset, Quaternion.identity);
+        GameObject newText = Instantiate(popUpTextPrefab, transform.position + positionOffset, Quaternion.identity);
 
         newText.GetComponent<TextMeshPro>().text = _text;
+
+        TextMeshPro textMeshPro = newText.GetComponent<TextMeshPro>();
+        textMeshPro.text = _text;
+        textMeshPro.color = _color;
     }
 
 
@@ -60,18 +93,18 @@ public class EntityFX : MonoBehaviour
             myHealthBar.SetActive(true);
             sr.color = Color.white;
         }
-            
+
     }
 
 
     private IEnumerator FlashFX()
     {
+
         sr.material = hitMat;
         Color currentColor = sr.color;
         sr.color = Color.white;
 
         yield return new WaitForSeconds(flashDuration);
-
         sr.color = currentColor;
         sr.material = originalMat;
     }

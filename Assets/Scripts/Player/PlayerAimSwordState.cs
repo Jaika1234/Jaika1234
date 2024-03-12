@@ -12,7 +12,7 @@ public class PlayerAimSwordState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
+        Cursor.lockState = CursorLockMode.None;
         player.skill.sword.DotsActive(true);
     }
 
@@ -29,14 +29,20 @@ public class PlayerAimSwordState : PlayerState
 
         player.SetZeroVelocity();
 
-        if (Input.GetKeyUp(KeyCode.Mouse1))
+        if (Input.GetButtonUp("Fire2")||Input.GetKeyUp(KeyCode.Mouse1))
             stateMachine.ChangeState(player.idleState);
 
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Input.mousePosition;
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (player.transform.position.x > mousePosition.x && player.facingDir == 1)
+                player.Flip();
+            else if (player.transform.position.x < mousePosition.x && player.facingDir == -1)
+                player.Flip();
+        }
 
-        if (player.transform.position.x > mousePosition.x && player.facingDir == 1)
-            player.Flip();
-        else if(player.transform.position.x < mousePosition.x && player.facingDir == -1)
-            player.Flip();
+
+
+
     }
 }

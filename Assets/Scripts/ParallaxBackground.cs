@@ -6,9 +6,11 @@ public class ParallaxBackground : MonoBehaviour
 {
     private GameObject cam;
 
-    [SerializeField] private float parallaxEffect;
+    [SerializeField] private float parallaxEffectX;
+    [SerializeField] private float parallaxEffectY;
 
     private float xPosition;
+    private float yPosition;
     private float length;
 
     void Start()
@@ -17,14 +19,18 @@ public class ParallaxBackground : MonoBehaviour
 
         length = GetComponent<SpriteRenderer>().bounds.size.x;
         xPosition = transform.position.x;
+        yPosition = transform.position.y;
     }
 
     void Update()
     {
-        float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);
-        float distanceToMove = cam.transform.position.x * parallaxEffect;
+        float distanceMoved = cam.transform.position.x * (1 - parallaxEffectX);
+        float distanceToMove = cam.transform.position.x * parallaxEffectX;
 
-        transform.position = new Vector3(xPosition + distanceToMove, transform.position.y);
+    //    float distanceMovedY = cam.transform.position.y * (1 - parallaxEffectY);
+        float distanceToMoveY = cam.transform.position.y * parallaxEffectY;
+
+        transform.position = new Vector3(xPosition + distanceToMove, yPosition+ distanceToMoveY);
 
 
         if (distanceMoved > xPosition + length)

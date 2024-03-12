@@ -23,7 +23,6 @@ public class PlayerCatchSwordState : PlayerState
 
         rb.velocity = new Vector2(player.swordReturnImpact * -player.facingDir, rb.velocity.y);
 
-            
     }
 
     public override void Exit()

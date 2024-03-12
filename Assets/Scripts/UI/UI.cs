@@ -34,8 +34,6 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
             SwitchWithKeyTo(skillUI);
 
-
-
     }
 
     public void SwitchTo(GameObject _menu)
@@ -51,10 +49,6 @@ public class UI : MonoBehaviour
             Time.timeScale = 1;
         else
             Time.timeScale = 0;
-
-
-
-
 
     }
 

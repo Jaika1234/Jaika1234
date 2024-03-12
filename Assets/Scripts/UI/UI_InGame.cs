@@ -14,9 +14,13 @@ public class UI_InGame : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI healthText;
 
+    protected Player player;
+
     private SkillManager skills;
     private void Start()
     {
+        player = PlayerManager.instance.player;
+
         if (playerStats != null)
             playerStats.onHealthChanged += upDateHealthUI;
 
@@ -29,15 +33,19 @@ public class UI_InGame : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
             SetCooldownOf(dashImage);
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if(Input.GetKeyDown(KeyCode.Mouse1)||Input.GetButtonDown("Fire2"))
             SetCooldownOf(swordImage);
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipment(EquipmentType.Flask) != null)
+        if (Input.GetButtonDown("UsePotion") && Inventory.instance.GetEquipment(EquipmentType.Flask) != null)
         {
-            Debug.Log("flask is cool down"+ Inventory.instance.flaskCooldown);
+            Debug.Log("Potion is cool down"+ Inventory.instance.flaskCooldown);
             SetCooldownOf(flaskImage);
         }
-            
+        if (Input.GetButtonDown("UsePotion") && Inventory.instance.GetEquipment(EquipmentType.Flask) == null)
+        {
+            player.fx.CreatePopUpText("You do not have a potion equipped.", Color.yellow);
+        }
+
 
 
         CheckCooldownof(dashImage, skills.dash.cooldown);
@@ -49,8 +57,10 @@ public class UI_InGame : MonoBehaviour
     {
         slider.maxValue = playerStats.GetMaxHealthValue();
         slider.value = playerStats.currentHealth;
+        healthText.text = $"{Mathf.Max(playerStats.currentHealth, 0)} / {playerStats.GetMaxHealthValue()}";
 
-        healthText.text = $"{playerStats.currentHealth} / {playerStats.GetMaxHealthValue()}";
+
+        //healthText.text = $"{playerStats.currentHealth} / {playerStats.GetMaxHealthValue()}";
     }
     private void SetCooldownOf(Image _image)
     {

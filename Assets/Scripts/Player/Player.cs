@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,8 +94,11 @@ public class Player : Entity
 
         CheckForDashInput();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButtonDown("UsePotion")) 
+        { 
+            Debug.Log("use potion");
             Inventory.instance.UseFlask();
+        }
 
     }
 
@@ -123,7 +127,7 @@ public class Player : Entity
     {
         if (IsWallDetected())
             return;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CanUseSkill())
+        if (Input.GetButtonDown("Dash") && SkillManager.instance.dash.CanUseSkill())
         {
 
             dashDir = Input.GetAxisRaw("Horizontal");

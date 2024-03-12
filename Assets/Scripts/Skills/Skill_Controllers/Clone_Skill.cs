@@ -54,12 +54,12 @@ public class Clone_Skill : Skill
     public void CreateCloneOnCounterAttack(Transform _enemyTransform)
     {
         if (canCreateCloneOnCounterAttack)
-            StartCoroutine(CreateCloneWithDelay(_enemyTransform, new Vector3(2 * player.facingDir, 0)));
+            StartCoroutine(CreateCloneWithDelay(_enemyTransform, new Vector3(2f * player.facingDir, 0)));
     }
 
     private IEnumerator CreateCloneWithDelay(Transform _trasnform,Vector3 _offset)
     {
         yield return new WaitForSeconds(.3f);
-            CreateClone(_trasnform,_offset);
+            CreateClone(_trasnform, _offset);
     }
 }

@@ -23,7 +23,6 @@ public class SkeletonBattleState : EnemyState
         if (player.GetComponent<PlayerStats>().isDead)
             stateMachine.ChangeState(enemy.moveState);
 
-        
     }
 
     public override void Update()
@@ -38,11 +37,12 @@ public class SkeletonBattleState : EnemyState
             {
                 if (CanAttack())
                     stateMachine.ChangeState(enemy.attackState);
+                return;
             }
         }
         else 
         {
-            if (stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 7)
+            if (stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 9)
                 stateMachine.ChangeState(enemy.idleState);
         }
 
@@ -52,7 +52,7 @@ public class SkeletonBattleState : EnemyState
         else if (player.position.x < enemy.transform.position.x)
             moveDir = -1;
 
-        enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
+        enemy.SetVelocity(enemy.moveSpeed*2f * moveDir, rb.velocity.y);
     }
 
     public override void Exit()

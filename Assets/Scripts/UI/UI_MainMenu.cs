@@ -9,7 +9,6 @@ public class UI_MainMenu : MonoBehaviour
 
     public void NewGame()
     {
-        Debug.Log("newgame");
         SceneManager.LoadScene(sceneName);
     }
     public void ExitGame()

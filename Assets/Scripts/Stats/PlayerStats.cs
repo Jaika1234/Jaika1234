@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : CharacterStats
 {
     private Player player;
-    
+
 
     protected override void Start()
     {
@@ -15,7 +15,9 @@ public class PlayerStats : CharacterStats
     public override void TakeDamage(int _damage)
     {
         base.TakeDamage(_damage);
+        player.fx.ScreenShake();
     }
+
     protected override void Die()
     {
         base.Die();

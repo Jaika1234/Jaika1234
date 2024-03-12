@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+
 public enum StatType
 {
     strength,
@@ -20,7 +21,7 @@ public enum StatType
 }
 public class CharacterStats : MonoBehaviour
 {
-    private EntityFX fx;
+    protected EntityFX fx;
 
     [Header("Major stats")]
     public Stat strength; // 1 point increase damage by 1 and crit.power by 1%
@@ -302,6 +303,8 @@ public class CharacterStats : MonoBehaviour
     public virtual void IncreaseHealthBy(int _healAmount)
     {
         currentHealth += _healAmount;
+        if (_healAmount > 0)
+            fx.CreatePopUpText(_healAmount.ToString(),Color.green);
 
         if (currentHealth > GetMaxHealthValue())
             currentHealth = GetMaxHealthValue();
@@ -317,7 +320,7 @@ public class CharacterStats : MonoBehaviour
         currentHealth -= _damage;
 
         if (_damage > 0)
-            fx.CreatePopUpText(_damage.ToString());
+            fx.CreatePopUpText(_damage.ToString(),Color.red);
 
         if (onHealthChanged != null)
             onHealthChanged();
@@ -436,4 +439,6 @@ public class CharacterStats : MonoBehaviour
                 return null;
         }
     }
+
+
 }

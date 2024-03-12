@@ -113,6 +113,10 @@ public class Sword_Skill_Controller : MonoBehaviour
                 player.CatchTheSword();
         }
 
+        if(Vector2.Distance(transform.position,player.transform.position)>15f)
+            ReturnSword();
+
+
         BounceLogic();
         SpinLogic();
     }
@@ -217,7 +221,7 @@ public class Sword_Skill_Controller : MonoBehaviour
 
         ItemData_Equipment weaponData = Inventory.instance.GetEquipment(EquipmentType.Weapon);
         ItemData_Equipment amuletData = Inventory.instance.GetEquipment(EquipmentType.Amulet);
-        //‘•”õ•i‚ÌƒAƒ^ƒbƒNŒø‰Ê‚±‚±‚É
+        //ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ÌƒAï¿½^ï¿½bï¿½Nï¿½ï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½
         if (weaponData != null)
             weaponData.Effect(enemy.transform);
 

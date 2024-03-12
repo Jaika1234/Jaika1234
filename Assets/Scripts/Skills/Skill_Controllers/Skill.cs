@@ -33,7 +33,7 @@ public class Skill : MonoBehaviour
 
 
         Debug.Log("Skill is on cooldown");
-        player.fx.CreatePopUpText("Cooldown");
+        player.fx.CreatePopUpText("Cooldown",Color.yellow);
         return false;
     }
 
@@ -44,7 +44,7 @@ public class Skill : MonoBehaviour
 
     protected virtual Transform FindClosestEnemy(Transform _checkTransform)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(_checkTransform.position, 25);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_checkTransform.position, 18);
 
         float closestDistance = Mathf.Infinity;
         Transform closestEnemy = null;
