@@ -41,8 +41,9 @@ public class PlayerAimSwordState : PlayerState
                 player.Flip();
         }
 
-
-
-
+        if (xInput!=0 && player.facingDir != xInput)
+        {
+            player.Flip();
+        }
     }
 }

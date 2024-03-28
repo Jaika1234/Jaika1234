@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    public static UI instance;
+    //20240328
+
     [SerializeField] private GameObject characterUI;
     [SerializeField] private GameObject skillUI;
     [SerializeField] private GameObject craftUI;
@@ -15,15 +18,31 @@ public class UI : MonoBehaviour
 
     public UI_ItemToolTip itemToolTip;
     public UI_StatToolTip statToolTip;
-   void Start()
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+            Destroy(gameObject);
+        //20240328
+    }
+    void Start()
     {
         SwitchTo(ingameUI);
 
         itemToolTip.gameObject.SetActive(false);
         statToolTip.gameObject.SetActive(false);
 
+
+
+
+
     }
-   void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
             SwitchWithKeyTo(characterUI);

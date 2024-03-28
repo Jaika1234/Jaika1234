@@ -46,7 +46,7 @@ public class Player : Entity
     public PlayerCatchSwordState catchSword { get; private set; }
 
     public PlayerDeadState deadState { get; private set; }
-    //public PlayerBlackholeState blackHole { get; private set; }
+
     #endregion
 
     protected override void Awake()

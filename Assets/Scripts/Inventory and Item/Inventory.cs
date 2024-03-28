@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 
 public class Inventory : MonoBehaviour
@@ -39,12 +40,28 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
         else
             Destroy(gameObject);
+
+
+
     }
     private void Start()
     {
+
+        if (inventorySlotParent == null)
+        {
+            inventorySlotParent = GameObject.Find("Inventory").transform;
+            stashSlotParent = GameObject.Find("Stash").transform;
+            equipmentParent = GameObject.Find("Equipment").transform;
+            statSlotParent = GameObject.Find("Stats").transform;
+            Debug.Log("we try to find ui paneal");
+        }
+
         player = PlayerManager.instance.player;
 
         inventory = new List<InventoryItem>();

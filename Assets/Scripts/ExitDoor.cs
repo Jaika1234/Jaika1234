@@ -32,7 +32,7 @@ public class ExitDoor : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                SceneManager.LoadScene("FinishGame");
+                SceneManager.LoadScene("NextScene");
             }
         }
         else

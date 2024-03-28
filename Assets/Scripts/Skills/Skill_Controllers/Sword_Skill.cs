@@ -133,6 +133,12 @@ public class Sword_Skill : Skill
     {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
+
+        if (horizontalInput == 0)
+        {
+            horizontalInput = player.facingDir;
+
+        }
             Vector2 joystickDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
             return joystickDirection;
