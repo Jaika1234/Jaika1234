@@ -221,7 +221,7 @@ public class Sword_Skill_Controller : MonoBehaviour
 
         ItemData_Equipment weaponData = Inventory.instance.GetEquipment(EquipmentType.Weapon);
         ItemData_Equipment amuletData = Inventory.instance.GetEquipment(EquipmentType.Amulet);
-        //�����i�̃A�^�b�N���ʂ�����
+        
         if (weaponData != null)
             weaponData.Effect(enemy.transform);
 
