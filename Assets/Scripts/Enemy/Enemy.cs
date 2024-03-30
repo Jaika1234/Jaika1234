@@ -12,7 +12,7 @@ public class Enemy : Entity
     [SerializeField] protected LayerMask whatIsPlayer;
 
     [Header("Stunned info")]
-    public float stunDuration;
+    public float stunDuration = 1.5f;
     public Vector2 stunDirection;
     protected bool canBeStunned;
     protected bool hitRecovery;//20240128
@@ -102,6 +102,7 @@ public class Enemy : Entity
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
     public virtual void AnimationSpecialAttackTrigger()
     {
+        Debug.Log("shoot arrow");
     }
 
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50, whatIsPlayer);

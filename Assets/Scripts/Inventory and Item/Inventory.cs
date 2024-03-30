@@ -46,9 +46,6 @@ public class Inventory : MonoBehaviour
         }
         else
             Destroy(gameObject);
-
-
-
     }
     private void Start()
     {
